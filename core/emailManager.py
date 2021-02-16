@@ -1,10 +1,12 @@
 import core.templateManager as TM
 import core.personne
 import core.email
+import os
+
 
 class EmailManager:
 	def __init__(self):
-		self.tm = TM.TemplateManager() #template manager
+		self.tm = TM.TemplateManager("res/templates.dat") #template manager
 		self.listMails = []
 		self.DOMAINES = []
 		with open("domaines.txt", "r") as f:
