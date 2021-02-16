@@ -1,19 +1,19 @@
 #for the console menu
-from consolemenu import *
-from consolemenu.items import *
+
 
 import core.personne
 import core.emailManager 
 
 
 def print_banner():
-	print("")
+	print("\n")
+	print("___________ 	          __        ________ ")
 	print("\_    _____/ _____ _____ |__|  |  /   _____/ ________________  ______ ______   ___________ ")
 	print("|     __)_ /      \\__  \ |  |  |  \_____  \_/ ___\_  __ \__   \ \____ \\____ \_/ __ \_  __ \ ")
 	print("|         \  Y Y  \/ __ \|  |  |__/        \  \___|  | \// __ \|  |_> >  |_> >  ___/|  | \/")
 	print("/_______  /__|_|  (____  /__|____/_______  /\___  >__|  (____  /   __/|   __/ \___  >__|   ")
 	print("        \/      \/     \/                \/     \/           \/|__|   |__|        \/       ")
-
+	print("\n\n")
 def print_menu():
 	print_banner()
 	print("1. EmailGenerator")
