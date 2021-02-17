@@ -40,8 +40,7 @@ class Menu:
         stop = False
         while(not stop):
             self.__clear()
-
-            self.__printOptions()
+            self.__print_menu()
             self.pileChoix.append(int(self.__get_choice())) #on ajoute sur la pile de choix le choix de l'user
             backward = self.__processChoiceQuitting()#on processs le choix
             if(backward and len(self.pileChoix)==1): #on quitte le run car quitter sur tier 0
