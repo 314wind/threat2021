@@ -2,7 +2,7 @@ import core.templateManager as TM
 import core.personne
 import core.email
 import os
-
+import re
 
 class EmailManager:
 	def __init__(self):
@@ -71,12 +71,16 @@ class EmailManager:
 
 	def checkEmails(self, emails):
 		res = []
+		regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"
+
 		for email in emails:
-			lpart,rpart = email.split("@")
-			if(len(lpart)>=4):
-				res.append(email)
+			#If email is valid
+			if(re.match(regex,email.strip())):
+				lpart,rpart = email.split("@")
+				if(len(lpart)>=4):
+					res.append(email.strip())
 		return res
-#test
+
 def sep():
 	print("_________________________")
 

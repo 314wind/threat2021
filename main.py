@@ -27,17 +27,17 @@ def get_choice():
 	return choice
 
 def main():
-	print_menu()
-	choice = get_choice()
-	#switching the choice :
-	if(choice == 1):
-		pass
-	if(choice == 2):
-		pass
-	else:
-		pass
+	# print_menu()
+	# choice = get_choice()
+	# #switching the choice :
+	# if(choice == 1):
+	# 	pass
+	# if(choice == 2):
+	# 	pass
+	# else:
+	# 	pass
 
-	exit()
+	# exit()
 	EM = core.emailManager.EmailManager()
 	Quentin = core.personne.Personne("Pierre", "Gouth")
 	EM.generateEmails(Quentin)
