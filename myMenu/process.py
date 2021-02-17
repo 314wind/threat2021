@@ -73,37 +73,60 @@ class Process:
         nom = input("Nom ?\n")
         prenom = input("Prenom ?\n")
         self.emailgenerator.setPersonne(nom,prenom)
+        print("done")
 
     def __generer_mails(self):
         self.emailgenerator.generateEmails()
 
     def __sauvegarder_mails_gen(self):
         self.emailgenerator.saveMails()
+        print("done")
 
     def __afficher_templates(self):
         self.emailgenerator.printTemplates()
+
 
     ##option menu 2
     def __url_a_scrapp(self):
         url = input("URL ?\n ")
         self.emailscrapper.set_url(url)
+        print("done")
 
     def __proxy_a_use_scrap(self):
         proxy = input("Proxy ? (A.A.A.A:1337) ?\n")
         self.emailscrapper.set_proxy(proxy)
+        print("done")
 
     def __set_timeout(self):
         to = input("Timeout ? \n")
         self.emailscrapper.set_timeout(to)
+        print("done")
 
     def __sauvegarder_mails_recup(self):
         self.emailscrapper.save_mails()
+        print("done")
 
     ##option menu3
 
     def __renseigner_email(self):
-        pass
+        mail = input("mail ? \n")
+        if(self.emailthruster is None):
+            self.emailthruster = REP.Reputation(mail)
+        self.emailthruster.set_mail(mail)
+        print("done")
+
+
     def __proxy_a_use_thrust(self):
-        pass
+        if(self.emailthruster is None):
+            print("Veuillez renseigné un mail au préalable")
+        else:
+            proxy = input("Proxy ? (A.A.A.A:1337) ?\n")
+            self.emailthruster.set_proxy(proxy)
+            print("done")
+
     def __sauvegarder_mails_info(self):
-        pass
+        if (self.emailthruster is None):
+            print("Veuillez renseigné un mail au préalable")
+        else:
+            self.emailthruster.save_response()
+            print("done")

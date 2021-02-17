@@ -9,7 +9,7 @@ class EmailManager:
 		self.tm = TM.TemplateManager("res/templates.dat") #template manager
 		self.listMails = []
 		self.DOMAINES = []
-		with open("domaines.txt", "r") as f:
+		with open("../res/domaines.txt", "r") as f:
 			lignes = f.readlines()
 			for ligne in lignes:
 				self.DOMAINES.append(ligne.strip())
@@ -22,7 +22,7 @@ class EmailManager:
 
 
 	def setPersonne(self, nom, prenom):
-		self.personne = emailGenerator.Personne(prenom, nom)
+		self.personne = emailGenerator.personne.Personne(prenom, nom)
 
 	def getMails(self):
 		return self.listMails
@@ -98,8 +98,8 @@ def sep():
 
 if (__name__=="__main__"):
 	EM = EmailManager()
-	Quentin = emailGenerator.personne.Personne("Quentin", "SIMIER")
-	EM.generateEmails(Quentin)
+	EM.setPersonne("SIMIER", "Quentin")
+	EM.generateEmails()
 	EM.toString()
 
 	

@@ -14,6 +14,20 @@ class Reputation:
 			self.choose_proxy()
 
 
+	def set_mail(self, mail):
+		self.mail = mail
+
+
+	def set_proxy(self, proxy):
+		self.proxies = {
+			"http": proxy,
+			"https" : proxy
+		}
+
+	def save_response(self):
+		with open("res/mail_reput.dat", "w") as f:
+			f.write(self.response_html_text)
+
 	def load_proxies(self):
 		#print("loading proxies")
 		proxies = list()
@@ -37,6 +51,7 @@ class Reputation:
 
 	def request(self):
 		try:
+
 			if(requests.get(url=self.url, proxies=self.proxies, timeout=self.timeout).status_code == 200):
 
 				#Check if we can access the website (return code)
