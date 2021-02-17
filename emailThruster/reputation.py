@@ -25,13 +25,14 @@ class Reputation:
 		}
 
 	def save_response(self):
-		with open("res/mail_reput.dat", "w") as f:
-			f.write(self.response_html_text)
+		with open("res/mail_reput.dat", "w+") as f:
+			for item in self.response_html_text:
+				f.write("%s\n" % item)
 
 	def load_proxies(self):
 		#print("loading proxies")
 		proxies = list()
-		with open("../res/proxy_list.txt", "r") as f:
+		with open("res/proxy_list.txt", "r") as f:
 			lignes = f.readlines()
 			for ligne in lignes:
 				#print(ligne.strip())
@@ -104,6 +105,6 @@ class Reputation:
 
 
 if(__name__ == "__main__"):
-	reputation = Reputation("zworkrowz@gmail.com", proxy="yes")
+	reputation = Reputation("zworkrowz@gmail.com", proxy="no")
 	reputation.run()
 	#scraper.load_proxies()

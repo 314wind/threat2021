@@ -1,6 +1,6 @@
 from os import name
 from os import system
-from myMenu import process
+import myMenu.process
 
 class Menu:
     def __init__(self):
@@ -18,6 +18,7 @@ class Menu:
             2.2 Proxy a utiliser
             2.3 Set le timeout 
             2.4 Sauvegarder les emails récupérés
+            2.5 Run
         3. EmailThruster
             3.1 Renseigner l'email
             3.2 Proxy a utiliser
@@ -25,19 +26,21 @@ class Menu:
         """
         self.optionsTier.append(["EmailGenerator", "EmailScrapper", "EmailThruster"]) #liste des options du myMenu level0
         self.optionsTier.append(["Renseigner la personne", "Generer des emails", "Sauvegarder les emails", "Afficher les templates"])
-        self.optionsTier.append(["URL a scrapper", "Proxy a utiliser","Set le timeout", "Sauvegarder les emails récupérés"])
+        self.optionsTier.append(["URL a scrapper", "Proxy a utiliser","Set le timeout", "Sauvegarder les emails récupérés", "Run"])
         self.optionsTier.append(["Renseigner l'email", "Proxy a utiliser","Sauvegarder les informations"])
 
         self.pileChoix = [] #en fonction des choix user on retient les choix précedent etc
         #ex : pileChoix = 13 ==> EmailTrhuster - Renseigner l'email
 
-        self.pro = process.Process()
+        self.pro = myMenu.process.Process()
 
 
     #routine du myMenu
     def run(self):
         stop = False
         while(not stop):
+            self.__clear()
+
             self.__printOptions()
             self.pileChoix.append(int(self.__get_choice())) #on ajoute sur la pile de choix le choix de l'user
             backward = self.__processChoiceQuitting()#on processs le choix
@@ -105,9 +108,16 @@ class Menu:
     def __get_choice(self):
         choice = '99'
         tier = len(self.pileChoix) #on recupere le niveau dans les menus via le choix
-        while (int(choice) > len(self.optionsTier[tier])+1):
-            choice = input(">")
-            #todo on peut afficher a nouveau les options ici
+        if(tier != 0):
+            menu = self.pileChoix[tier-1] #on recup le menu
+        else:
+            menu = 0
+        try:
+            while (int(choice) > len(self.optionsTier[menu])+1):
+                choice = input(">")
+                #todo on peut afficher a nouveau les options ici
+        except ValueError:
+            self.__get_choice()
         return choice
 
     #clear l'output
@@ -116,7 +126,7 @@ class Menu:
             print("exec cls")
             system('cls')
         else:
-            print("exec clearr")
+            print("exec clear")
             system('clear')
 
 if (__name__=="__main__"):

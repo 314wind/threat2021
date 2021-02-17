@@ -5,6 +5,7 @@
 import re
 import requests
 import random
+import os
 
 class Scraper:
 	def __init__(self, url=None, proxy="no"):
@@ -27,7 +28,8 @@ class Scraper:
 	def load_proxies(self):
 		#print("loading proxies")
 		proxies = list()
-		with open("../res/proxy_list.txt", "r") as f:
+		print("OS : ", os.getcwd())
+		with open("res/proxy_list.txt", "r") as f:
 			lignes = f.readlines()
 			for ligne in lignes:
 				#print(ligne.strip())
@@ -97,8 +99,9 @@ class Scraper:
 			return
 
 	def save_mails(self):
-		with open("res/mail_scrapped.dat", "w") as f:
-			f.write(self.emails)
+		with open("res/mail_scrapped.dat", "w+") as f:
+			for item in self.emails:
+				f.write(item)
 
 	def run(self):
 		self.request()

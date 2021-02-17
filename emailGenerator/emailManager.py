@@ -9,7 +9,7 @@ class EmailManager:
 		self.tm = TM.TemplateManager("res/templates.dat") #template manager
 		self.listMails = []
 		self.DOMAINES = []
-		with open("../res/domaines.txt", "r") as f:
+		with open("res/domaines.txt", "r") as f:
 			lignes = f.readlines()
 			for ligne in lignes:
 				self.DOMAINES.append(ligne.strip())
@@ -43,8 +43,9 @@ class EmailManager:
 
 
 	def saveMails(self):
-		with open("res/mails_saved.dat", "w") as f:
-			f.write(self.listMails)
+		with open("res/mails_saved.dat", "w+") as f:
+			for mail in self.listMails:
+				f.write(mail.toString()+"\n")
 		print("Done saving")
 
 	def printTemplates(self):
@@ -56,6 +57,10 @@ class EmailManager:
 
 	def generateEmails(self):
 		liste_templates = self.tm.getAllTemplates()
+		if(self.personne is None):
+			print("Il faut renseigner d'abord une personne")
+			return
+
 		nom = self.personne.getNom()
 		prenom = self.personne.getPrenom()
 		#on bind les paramètres
@@ -64,6 +69,8 @@ class EmailManager:
 			emails = self.fillTemplate(tmp,nom,prenom)
 			checked_emails = self.checkEmails(emails)
 			self.addEmails(checked_emails)
+		self.toString()
+		print("\n\n")
 
 
 	def fillTemplate(self, template, var1, var2): #template, nom, prenom

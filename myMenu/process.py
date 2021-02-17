@@ -26,17 +26,19 @@ class Process:
                 2.2 Proxy a utiliser
                 2.3 Set le timeout
                 2.4 Sauvegarder les emails récupérés
+                2.5 Run
             3. EmailThruster
                 3.1 Renseigner l'email
                 3.2 Proxy a utiliser
                 3.3 Sauvegarder les informations
             """
-            print("HEREHRHEE")
+
+
             if(pileChoice[0]==1):
                 self.__cess1(pileChoice[1])
             if(pileChoice[0]==2):
                 self.__cess2(pileChoice[1])
-            if(pileChoice[0]==2):
+            if(pileChoice[0]==3):
                 self.__cess3(pileChoice[1])
 
     def __cess1(self,choix):
@@ -58,6 +60,8 @@ class Process:
             self.__set_timeout()
         if (choix == 4):
             self.__sauvegarder_mails_recup()
+        if (choix == 5):
+            self.__run_scrap()
 
     def __cess3(self,choix):
         if (choix == 1):  # 1.1 Renseigner la personne
@@ -106,6 +110,10 @@ class Process:
         self.emailscrapper.save_mails()
         print("done")
 
+
+    def __run_scrap(self):
+        self.emailscrapper.run()
+
     ##option menu3
 
     def __renseigner_email(self):
@@ -114,7 +122,6 @@ class Process:
             self.emailthruster = REP.Reputation(mail)
         self.emailthruster.set_mail(mail)
         print("done")
-
 
     def __proxy_a_use_thrust(self):
         if(self.emailthruster is None):
@@ -130,3 +137,4 @@ class Process:
         else:
             self.emailthruster.save_response()
             print("done")
+

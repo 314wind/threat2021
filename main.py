@@ -3,7 +3,7 @@
 
 import emailGenerator.personne
 import emailGenerator.emailManager
-from myMenu import MyMenu
+from .myMenu import MyMenu
 
 
 def main():
