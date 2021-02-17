@@ -1,6 +1,7 @@
 import emailGenerator.templateManager as TM
 import emailGenerator.personne
 import emailGenerator.email
+
 import re
 
 class EmailManager:
@@ -17,8 +18,11 @@ class EmailManager:
 		self.NOMBRES = [i for i in range(0,99)]
 
 		self.NOMBRES_RANDOM = -1
+		self.personne = None
 
 
+	def setPersonne(self, nom, prenom):
+		self.personne = emailGenerator.Personne(prenom, nom)
 
 	def getMails(self):
 		return self.listMails
@@ -37,14 +41,23 @@ class EmailManager:
 		for e in emails:
 			self.listMails.append(emailGenerator.email.Email(e))
 
+
+	def saveMails(self):
+		with open("res/mails_saved.dat", "w") as f:
+			f.write(self.listMails)
+		print("Done saving")
+
+	def printTemplates(self):
+		self.tm.toString()
+
 	###TODO
 	#		get un email dans la liste
 	#		get un email par rapport a son indice
 
-	def generateEmails(self, personne):
+	def generateEmails(self):
 		liste_templates = self.tm.getAllTemplates()
-		nom = personne.getNom()
-		prenom = personne.getPrenom()
+		nom = self.personne.getNom()
+		prenom = self.personne.getPrenom()
 		#on bind les paramètres
 		#parcours templates
 		for tmp in liste_templates: #on itère sur des objets string.Template

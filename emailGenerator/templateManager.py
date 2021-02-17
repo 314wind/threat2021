@@ -64,6 +64,8 @@ class TemplateManager:
 		for tmp in self.t:
 			print(tmp.toString())
 
+
+
 #test
 def sep():
 	print("_________________________")

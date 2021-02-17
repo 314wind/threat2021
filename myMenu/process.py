@@ -1,11 +1,14 @@
 #c'est la que la pieuvre s'execute
+from emailGenerator import emailManager as EM
+from emailScrapper import scraper as SCRAP
+from emailThruster import reputation as REP
 
 class Process:
     def __init__(self):
         self.pileChoice = None #on l'init a vide on attend qu'on nous le passe en argument
         # une et une seule instance
-        self.emailgenerator = None  # pour module generator
-        self.emailscrapper = None  # pour module scrapper
+        self.emailgenerator = EM.EmailManager()  # pour module generator
+        self.emailscrapper = SCRAP.Scraper()  # pour module scrapper
         self.emailthruster = None  # pour module thruster
         #on instancie a la volet si c'est pas fait
         print("done")
@@ -38,13 +41,69 @@ class Process:
 
     def __cess1(self,choix):
         if(choix==1): #1.1 Renseigner la personne
+            self.__renseigner_personne()
+        if(choix==2):
+            self.__generer_mails()
+        if(choix==3):
+            self.__sauvegarder_mails_gen()
+        if(choix==4):
+            self.__afficher_templates()
 
-            pass
     def __cess2(self,choix):
-        print("Processing myMenu 1 and choice :", choix)
-        pass
+        if (choix == 1):  # 1.1 Renseigner la personne
+            self.__url_a_scrapp()
+        if (choix == 2):
+            self.__proxy_a_use_scrap()
+        if (choix == 3):
+            self.__set_timeout()
+        if (choix == 4):
+            self.__sauvegarder_mails_recup()
 
     def __cess3(self,choix):
-        print("Processing myMenu 1 and choice :", choix)
-        pass
+        if (choix == 1):  # 1.1 Renseigner la personne
+            self.__renseigner_email()
+        if (choix == 2):
+            self.__proxy_a_use_thrust()
+        if (choix == 3):
+            self.__sauvegarder_mails_info()
 
+
+    ###option menu 1
+    def __renseigner_personne(self):
+        nom = input("Nom ?\n")
+        prenom = input("Prenom ?\n")
+        self.emailgenerator.setPersonne(nom,prenom)
+
+    def __generer_mails(self):
+        self.emailgenerator.generateEmails()
+
+    def __sauvegarder_mails_gen(self):
+        self.emailgenerator.saveMails()
+
+    def __afficher_templates(self):
+        self.emailgenerator.printTemplates()
+
+    ##option menu 2
+    def __url_a_scrapp(self):
+        url = input("URL ?\n ")
+        self.emailscrapper.set_url(url)
+
+    def __proxy_a_use_scrap(self):
+        proxy = input("Proxy ? (A.A.A.A:1337) ?\n")
+        self.emailscrapper.set_proxy(proxy)
+
+    def __set_timeout(self):
+        to = input("Timeout ? \n")
+        self.emailscrapper.set_timeout(to)
+
+    def __sauvegarder_mails_recup(self):
+        self.emailscrapper.save_mails()
+
+    ##option menu3
+
+    def __renseigner_email(self):
+        pass
+    def __proxy_a_use_thrust(self):
+        pass
+    def __sauvegarder_mails_info(self):
+        pass

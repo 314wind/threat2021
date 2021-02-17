@@ -7,7 +7,7 @@ import requests
 import random
 
 class Scraper:
-	def __init__(self, url, proxy="no"):
+	def __init__(self, url=None, proxy="no"):
 		self.regex = r'(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(?!(png|jpg|jpeg)$)*[A-Za-z]{2,6}\b)'
 		self.url = url
 		self.response_html_text = ""
@@ -18,6 +18,11 @@ class Scraper:
 		if(proxy == "yes"):
 			self.choose_proxy()
 
+	def set_url(self,url):
+		self.url = url
+
+	def set_timeout(self, to):
+		self.timeout = to
 
 	def load_proxies(self):
 		#print("loading proxies")
@@ -39,16 +44,24 @@ class Scraper:
 		}
 		#print(self.proxies)
 
+	def set_proxy(self, proxy):
+		self.proxies = {
+			"http": proxy,
+			"https" : proxy
+		}
 
 	def request(self):
 		try:
-			if(requests.get(url=self.url, proxies=self.proxies, timeout=self.timeout).status_code == 200):
+			if(self.url is None):
+				print("Veuillez renseigner un url a scrapper")
+			else:#url is not none
+				if(requests.get(url=self.url, proxies=self.proxies, timeout=self.timeout).status_code == 200):
 
-				#Check if we can access the website (return code)
-				self.response_html_text = requests.get(url=self.url, proxies=self.proxies, timeout=self.timeout).text
-			else:
-				print("Can't access URL")
-				return
+					#Check if we can access the website (return code)
+					self.response_html_text = requests.get(url=self.url, proxies=self.proxies, timeout=self.timeout).text
+				else:
+					print("Can't access URL")
+					return
 		except requests.exceptions.ProxyError:
 			print("Can't connect through proxy")
 			#Restart only if option --retry ?
@@ -83,6 +96,9 @@ class Scraper:
 			print("No emails found")
 			return
 
+	def save_mails(self):
+		with open("res/mail_scrapped.dat", "w") as f:
+			f.write(self.emails)
 
 	def run(self):
 		self.request()
