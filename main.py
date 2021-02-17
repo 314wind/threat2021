@@ -1,43 +1,15 @@
-#for the console menu
+#for the console myMenu
 
 
 import emailGenerator.personne
 import emailGenerator.emailManager
+from myMenu import MyMenu
 
-
-def print_banner():
-	print("\n")
-	print("___________ 	          __        ________ ")
-	print("\_    _____/ _____ _____ |__|  |  /   _____/ ________________  ______ ______   ___________ ")
-	print("|     __)_ /      \\__  \ |  |  |  \_____  \_/ ___\_  __ \__   \ \____ \\____ \_/ __ \_  __ \ ")
-	print("|         \  Y Y  \/ __ \|  |  |__/        \  \___|  | \// __ \|  |_> >  |_> >  ___/|  | \/")
-	print("/_______  /__|_|  (____  /__|____/_______  /\___  >__|  (____  /   __/|   __/ \___  >__|   ")
-	print("        \/      \/     \/                \/     \/           \/|__|   |__|        \/       ")
-	print("\n\n")
-def print_menu():
-	print_banner()
-	print("1. EmailGenerator")
-	print("2. EmailVerificator")
-
-def get_choice():
-	choice = '0'
-	while(int(choice) != 1 and int(choice) != 2):
-		print("enter choice between 1 and 2")
-		choice = input(">")
-	return choice
 
 def main():
-	# print_menu()
-	# choice = get_choice()
-	# #switching the choice :
-	# if(choice == 1):
-	# 	pass
-	# if(choice == 2):
-	# 	pass
-	# else:
-	# 	pass
-
-	# exit()
+	m = MyMenu()
+	m.run()
+	exit()
 	EM = emailGenerator.emailManager.EmailManager()
 	Quentin = emailGenerator.personne.Personne("Pierre", "Gouth")
 	EM.generateEmails(Quentin)
