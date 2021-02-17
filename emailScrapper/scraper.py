@@ -22,7 +22,7 @@ class Scraper:
 	def load_proxies(self):
 		#print("loading proxies")
 		proxies = list()
-		with open("proxy_list.txt", "r") as f:
+		with open("../res/proxy_list.txt", "r") as f:
 			lignes = f.readlines()
 			for ligne in lignes:
 				#print(ligne.strip())

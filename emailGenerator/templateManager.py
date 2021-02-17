@@ -1,4 +1,4 @@
-import core.template  #le notre
+import emailGenerator.template  #le notre
 
 class TemplateManager:
 
@@ -23,7 +23,7 @@ class TemplateManager:
 					if(line.count('@')!=1):#on verifie que y'a qu'un seul @ dans le template 
 						print(">>template : ", line,"as to many @")
 						continue
-					self.t.append(core.template.Template(line))
+					self.t.append(emailGenerator.template.Template(line))
 				for tmp in self.t: #DEBUG
 					print(tmp.toString())
 		except IOError:
@@ -32,14 +32,14 @@ class TemplateManager:
 
 	def __defaultLoad(self):
 		print ("file not found loading default template")
-		self.t.append(core.template.Template("$var1$var2@$domaine"))
-		self.t.append(core.template.Template("$var1.$var2@$domaine"))
+		self.t.append(emailGenerator.template.Template("$var1$var2@$domaine"))
+		self.t.append(emailGenerator.template.Template("$var1.$var2@$domaine"))
 		for tmp in self.t: #DEBUG
 			print(tmp.toString())
 
 
 	def addTemplate(self, string):
-		self.t.append(core.template.Template(string))
+		self.t.append(emailGenerator.template.Template(string))
 
 	def removeTemplateFromIndice(self, indice):
 		del self.t[indice]

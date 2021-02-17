@@ -1,7 +1,6 @@
-import core.templateManager as TM
-import core.personne
-import core.email
-import os
+import emailGenerator.templateManager as TM
+import emailGenerator.personne
+import emailGenerator.email
 import re
 
 class EmailManager:
@@ -36,7 +35,7 @@ class EmailManager:
 
 	def addEmails(self, emails):
 		for e in emails:
-			self.listMails.append(core.email.Email(e))
+			self.listMails.append(emailGenerator.email.Email(e))
 
 	###TODO
 	#		get un email dans la liste
@@ -86,7 +85,7 @@ def sep():
 
 if (__name__=="__main__"):
 	EM = EmailManager()
-	Quentin = core.personne.Personne("Quentin", "SIMIER")
+	Quentin = emailGenerator.personne.Personne("Quentin", "SIMIER")
 	EM.generateEmails(Quentin)
 	EM.toString()
 

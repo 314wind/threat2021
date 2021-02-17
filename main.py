@@ -1,8 +1,8 @@
 #for the console menu
 
 
-import core.personne
-import core.emailManager 
+import emailGenerator.personne
+import emailGenerator.emailManager
 
 
 def print_banner():
@@ -38,8 +38,8 @@ def main():
 	# 	pass
 
 	# exit()
-	EM = core.emailManager.EmailManager()
-	Quentin = core.personne.Personne("Pierre", "Gouth")
+	EM = emailGenerator.emailManager.EmailManager()
+	Quentin = emailGenerator.personne.Personne("Pierre", "Gouth")
 	EM.generateEmails(Quentin)
 	#EM.toString()
 	mails = EM.getMailsAsString() # ici on a la liste des mails généré 
