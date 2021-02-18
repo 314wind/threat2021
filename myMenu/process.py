@@ -46,10 +46,12 @@ class Process:
             self.__renseigner_personne()
         if(choix==2):
             self.__generer_mails()
+            input("press enter to continue")
         if(choix==3):
             self.__sauvegarder_mails_gen()
         if(choix==4):
             self.__afficher_templates()
+            input("press enter to continue")
 
     def __cess2(self,choix):
         if (choix == 1):  # 1.1 Renseigner la personne
@@ -62,14 +64,18 @@ class Process:
             self.__sauvegarder_mails_recup()
         if (choix == 5):
             self.__run_scrap()
+            input("press enter to continue")
 
     def __cess3(self,choix):
-        if (choix == 1):  # 1.1 Renseigner la personne
+        if (choix == 1):
             self.__renseigner_email()
         if (choix == 2):
             self.__proxy_a_use_thrust()
         if (choix == 3):
             self.__sauvegarder_mails_info()
+        if (choix == 4):
+            self.__run_thrust()
+            input("press enter to continue")
 
 
     ###option menu 1
@@ -136,5 +142,12 @@ class Process:
             print("Veuillez renseigné un mail au préalable")
         else:
             self.emailthruster.save_response()
+            print("done")
+
+    def __run_thrust(self):
+        if (self.emailthruster is None):
+            print("Veuillez renseigné un mail au préalable")
+        else:
+            self.emailthruster.run()
             print("done")
 

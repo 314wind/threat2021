@@ -26,8 +26,8 @@ class Menu:
         """
         self.optionsTier.append(["EmailGenerator", "EmailScrapper", "EmailThruster"]) #liste des options du myMenu level0
         self.optionsTier.append(["Renseigner la personne", "Generer des emails", "Sauvegarder les emails", "Afficher les templates"])
-        self.optionsTier.append(["URL a scrapper", "Proxy a utiliser","Set le timeout", "Sauvegarder les emails récupérés", "Run"])
-        self.optionsTier.append(["Renseigner l'email", "Proxy a utiliser","Sauvegarder les informations"])
+        self.optionsTier.append(["URL a scrapper", "Proxy a utiliser","Set le timeout", "Sauvegarder les emails récupérés", "Lancer le scrapping"])
+        self.optionsTier.append(["Renseigner l'email", "Proxy a utiliser","Sauvegarder les informations","Lancer l'analyse de confiance"])
 
         self.pileChoix = [] #en fonction des choix user on retient les choix précedent etc
         #ex : pileChoix = 13 ==> EmailTrhuster - Renseigner l'email
