@@ -3,7 +3,7 @@ from emailGenerator import emailManager as EM
 from emailScrapper import scraper as SCRAP
 from emailThruster import reputation as REP
 
-class Process:
+class Connector:
     def __init__(self):
         self.pileChoice = None #on l'init a vide on attend qu'on nous le passe en argument
         # une et une seule instance

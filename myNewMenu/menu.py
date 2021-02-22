@@ -1,52 +1,43 @@
 import copy
-import test
+#import test
+import connector as con
 
 class Menu:
+
 	def __init__(self):
+		myfunc = con.Connector()
 		self.menu = {
-			"1": ("First option, first menu", { 
-					"1": ("First option, second menu", self.my_function1), #getattr(test.Test, "print_func")("my_arg")
-					"2": ("Second option, second menu, first option", self.my_function2),
-					"3": ("Third option, configure things", {
-						"1": ("Configure name", self.config_name),
-						"2": ("Configure surname", self.config_surname),
-						"3": ("Submenu (again)", {
-							"1": ("My best menu", self.config_surname),
-							"2": ("Wow again ???", {
-								"1": ("Hope this is last...", test.print_func),
-								"2": ("Return", None)
-							}),
-							"3": ("Return", None)
-						}),
-						"4": ("Return", None)
-					}),
-					"4": ("Return", None)
+			"1": ("Email Generator", {
+				"1": ("Configure", {
+					"1": ("Configure firstname", myfunc.configure_firstname),
+					"2": ("Configure surname", myfunc.configure_surname)
+				}), #getattr(test.Test, "print_func")("my_arg")
+				"2": ("Generate mails", myfunc.generate_mail),
+				"3": ("Save generated mails", myfunc.save_mails_gen),
+				"4": ("Print templates", myfunc.print_templates),
+				"5": ("Return", None)
 			}),
-			"2": ("Second option, first menu", { 
-					"1": ("First option, second menu, second option", self.my_function3),
-					"2": ("Return", None)
+			"2": ("Email Scrapper", {
+				"1": ("Set up the URL", myfunc.setup_url_scrapp),
+				"2": ("Set up the proxy", myfunc.setup_proxy_scrapp),
+				"3": ("Set up the timeout (in s)", myfunc.setup_timeout),
+				"4": ("Save the gathered mails", myfunc.save_gathered_mail),
+				"5": ("Run the scrapping", myfunc.run_scrap),
+				"6": ("Return", None)
 			}),
-			"3": ("Quit", None)
+			"3": ("Email Thruster", {
+				"1": ("Set up the mail", myfunc.setup_mail_thrust),
+				"2": ("Set up the proxy", myfunc.setup_proxy_thrust),
+				"3": ("Save the information", myfunc.save_mail_info_thrust),
+				"4": ("Run the thrusting module", myfunc.run_thrust),
+				"5": ("Return", None)
+			})
 		}
 
 		#Check level of menu with number of items in list
 		self.history = []
 		self.temp_menu = copy.copy(self.menu)
 
-	def my_function1(self):
-		print("This is my function1 which is called from " + self.__class__.__name__)
-
-	def my_function2(self):
-		print("This is my function2 which is called")
-
-	def my_function3(self):
-		print("This is my function3 which is called")
-
-	def config_name(self):
-		print("Function to configure name")
-
-	def config_surname(self):
-		print("Function to configure surname")
 
 	def top_level_menu(self):
 		for number in sorted(self.menu.keys()):
@@ -117,6 +108,8 @@ class Menu:
 		available_choices = self.get_choices()
 		return user_input in available_choices
 
+	def print_test(self):
+		print("This is a test")
 
 
 if(__name__ == "__main__"):

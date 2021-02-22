@@ -20,9 +20,16 @@ class EmailManager:
 		self.NOMBRES_RANDOM = -1
 		self.personne = None
 
+	def setSurname(self, nom):
+		if(self.personne is None):
+			self.personne = emailGenerator.personne.Personne()
+		self.personne.setSurname(nom)
 
-	def setPersonne(self, nom, prenom):
-		self.personne = emailGenerator.personne.Personne(prenom, nom)
+	def setFirstname(self, prenom):
+		if (self.personne is None):
+			self.personne = emailGenerator.personne.Personne()
+		self.personne.setFirstname(prenom)
+
 
 	def getMails(self):
 		return self.listMails
@@ -41,7 +48,7 @@ class EmailManager:
 		for e in emails:
 			if(e != None):
 				#Verifications are made when creating an email
-				self.listMails.append(email.Email(e))
+				self.listMails.append(e.Email(e))
 
 
 	def saveMails(self):
@@ -89,6 +96,9 @@ class EmailManager:
 					if(i!=j):
 						emails.append(template.getTemplate().substitute(var1=args[i], var2=args[j], domaine=domaine))
 		return emails
+
+
+
 
 def sep():
 	print("_________________________")

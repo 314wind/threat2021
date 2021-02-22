@@ -32,7 +32,7 @@ class Menu:
         self.pileChoix = [] #en fonction des choix user on retient les choix précedent etc
         #ex : pileChoix = 13 ==> EmailTrhuster - Renseigner l'email
 
-        self.pro = myMenu.process.Process()
+        self.pro = myMenu.process.Connector()
 
 
     #routine du myMenu
