@@ -52,7 +52,6 @@ class Reputation:
 
 	def request(self):
 		try:
-
 			if(requests.get(url=self.url, proxies=self.proxies, timeout=self.timeout).status_code == 200):
 
 				#Check if we can access the website (return code)
@@ -71,6 +70,7 @@ class Reputation:
 			#Restart only if option --retry ?
 			self.choose_proxy()
 			self.request()
+
 #{'email': 'gouthp@gmail.com', 'reputation': 'high', 'suspicious': False, 'references': 6, 'details': {'blacklisted': False, 
 #'malicious_activity': False, 'malicious_activity_recent': False, 'credentials_leaked': True, 'credentials_leaked_recent': False, 
 #'data_breach': True, 'first_seen': '02/28/2013', 'last_seen': '01/13/2020', 'domain_exists': True, 'domain_reputation': 'n/a', 

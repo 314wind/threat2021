@@ -39,7 +39,9 @@ class EmailManager:
 
 	def addEmails(self, emails):
 		for e in emails:
-			self.listMails.append(emailGenerator.email.Email(e))
+			if(e != None):
+				#Verifications are made when creating an email
+				self.listMails.append(email.Email(e))
 
 
 	def saveMails(self):
@@ -67,8 +69,8 @@ class EmailManager:
 		#parcours templates
 		for tmp in liste_templates: #on itère sur des objets string.Template
 			emails = self.fillTemplate(tmp,nom,prenom)
-			checked_emails = self.checkEmails(emails)
-			self.addEmails(checked_emails)
+			self.addEmails(emails)
+
 		self.toString()
 		print("\n\n")
 
@@ -87,18 +89,6 @@ class EmailManager:
 					if(i!=j):
 						emails.append(template.getTemplate().substitute(var1=args[i], var2=args[j], domaine=domaine))
 		return emails
-
-	def checkEmails(self, emails):
-		res = []
-		regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"
-
-		for email in emails:
-			#If email is valid
-			if(re.match(regex,email.strip())):
-				lpart,rpart = email.split("@")
-				if(len(lpart)>=4):
-					res.append(email.strip())
-		return res
 
 def sep():
 	print("_________________________")
