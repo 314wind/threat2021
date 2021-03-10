@@ -7,12 +7,12 @@ class TemplateManager:
 		self.t = []
 		
 		if(filename is not None):#un nom de fichier a ete renseigne pour lire les templates
-			print("init templates from files...")
+			#print("init templates from files...")
 			self.__fileLoad(filename) #init nos templates par fichiers
-			print("done.....")
+			#print("done.....")
 		else:
 			self.__defaultLoad() #init nos deux templates
-			print("done.....")
+			#print("done.....")
 		
 
 	def __fileLoad(self,filename):
@@ -21,7 +21,7 @@ class TemplateManager:
 				lines = f.readlines()
 				for line in lines:#parcours de chaque ligne
 					if(line.count('@')!=1):#on verifie que y'a qu'un seul @ dans le template 
-						print(">>template : ", line,"as to many @")
+						#print(">>template : ", line,"as to many @")
 						continue
 					self.t.append(emailGenerator.template.Template(line))
 				for tmp in self.t: #DEBUG
@@ -31,11 +31,11 @@ class TemplateManager:
 			self.__defaultLoad()
 
 	def __defaultLoad(self):
-		print ("file not found loading default template")
+		#print ("file not found loading default template")
 		self.t.append(emailGenerator.template.Template("$var1$var2@$domaine"))
 		self.t.append(emailGenerator.template.Template("$var1.$var2@$domaine"))
-		for tmp in self.t: #DEBUG
-			print(tmp.toString())
+		# for tmp in self.t: #DEBUG
+		# 	print(tmp.toString())
 
 
 	def addTemplate(self, string):

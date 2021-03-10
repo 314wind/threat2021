@@ -1,20 +1,20 @@
 #for the console myMenu
 
 
-import emailGenerator.personne
-import emailGenerator.emailManager
-from .myMenu import MyMenu
+# import emailGenerator.personne
+# import emailGenerator.emailManager
+import myNewMenu.menu
 
 
 def main():
-	m = MyMenu()
-	m.run()
-	exit()
-	EM = emailGenerator.emailManager.EmailManager()
-	Quentin = emailGenerator.personne.Personne("Pierre", "Gouth")
-	EM.generateEmails(Quentin)
-	#EM.toString()
-	mails = EM.getMailsAsString() # ici on a la liste des mails généré 
+	m = myNewMenu.menu.Menu()
+	m.print_current_menu()
+	m.ask_user_input()
+	# EM = emailGenerator.emailManager.EmailManager()
+	# user = emailGenerator.personne.Personne("Pierre", "Gouth")
+	# EM.generateEmails(user)
+	# #EM.toString()
+	# mails = EM.getMailsAsString() # ici on a la liste des mails généré 
 
 
 """

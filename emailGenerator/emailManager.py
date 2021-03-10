@@ -48,7 +48,7 @@ class EmailManager:
 		for e in emails:
 			if(e != None):
 				#Verifications are made when creating an email
-				self.listMails.append(e.Email(e))
+				self.listMails.append(emailGenerator.email.Email(e))
 
 
 	def saveMails(self):

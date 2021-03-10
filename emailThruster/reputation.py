@@ -79,23 +79,26 @@ class Reputation:
 #'spoofable': True, 'spf_strict': True, 'dmarc_enforced': False, 'profiles': ['twitter']}}
 
 	def parse_results(self):
-		if(self.response_html_text != ""):
-			json_array = json.loads(self.response_html_text)
-			print("Email searched : " + json_array['email'])
-			print("Reputation level : " + json_array['reputation'])
-			print("Suspicious : " + str(json_array['suspicious']))
-			print("Blacklisted email : " + str(json_array["details"]['blacklisted']))
-			#If True then search on HaveIBeenPwned
-			print("Credentials leaked : " + str(json_array["details"]['credentials_leaked']))
-			print("Spam email address : " + str(json_array["details"]['spam']))
-			print("Spoofable email address : " + str(json_array["details"]['spoofable']))
-			if(len(json_array["details"]['profiles']) != 0):
-				print("Email found on : ")
-				for service in json_array["details"]['profiles']:
-					print("- " + service)
-		else:
+		try:
+			if(self.response_html_text != ""):
+				json_array = json.loads(self.response_html_text)
+				print("Email searched : " + json_array['email'])
+				print("Reputation level : " + json_array['reputation'])
+				print("Suspicious : " + str(json_array['suspicious']))
+				print("Blacklisted email : " + str(json_array["details"]['blacklisted']))
+				#If True then search on HaveIBeenPwned
+				print("Credentials leaked : " + str(json_array["details"]['credentials_leaked']))
+				print("Spam email address : " + str(json_array["details"]['spam']))
+				print("Spoofable email address : " + str(json_array["details"]['spoofable']))
+				if(len(json_array["details"]['profiles']) != 0):
+					print("Email found on : ")
+					for service in json_array["details"]['profiles']:
+						print("- " + service)
+			else:
+				print("Can't parse results")
+				return
+		except:
 			print("Can't parse results")
-			return
 
 
 	def run(self):

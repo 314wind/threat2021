@@ -1,6 +1,6 @@
 import copy
 #import test
-import connector as con
+import myNewMenu.connector as con
 
 class Menu:
 
@@ -10,7 +10,8 @@ class Menu:
 			"1": ("Email Generator", {
 				"1": ("Configure", {
 					"1": ("Configure firstname", myfunc.configure_firstname),
-					"2": ("Configure surname", myfunc.configure_surname)
+					"2": ("Configure surname", myfunc.configure_surname),
+					"3": ("Return", None)
 				}), #getattr(test.Test, "print_func")("my_arg")
 				"2": ("Generate mails", myfunc.generate_mail),
 				"3": ("Save generated mails", myfunc.save_mails_gen),
@@ -31,7 +32,8 @@ class Menu:
 				"3": ("Save the information", myfunc.save_mail_info_thrust),
 				"4": ("Run the thrusting module", myfunc.run_thrust),
 				"5": ("Return", None)
-			})
+			}),
+			"4": ("Exit", None)
 		}
 
 		#Check level of menu with number of items in list
@@ -71,7 +73,11 @@ class Menu:
 		menu_choice = self.get_last_item()
 		#temp_menu is the menu from the user choice and everything below
 
-		#Bug here when too depth
+		#Save the menu and history in case a function is called
+		self.temp_menu_before_func = copy.copy(self.temp_menu)
+
+
+
 		self.temp_menu = self.temp_menu[menu_choice][1]
 		#If temp_menu is not a dict it means we are on a leaf of a branch
 		if(not isinstance(self.temp_menu, dict)):
@@ -86,22 +92,26 @@ class Menu:
 
 				self.update_menu()
 			else:
-				print("Calling function")
 				self.temp_menu()
-				exit()
+				#At the end of function must return to the same menu as before
+				self.temp_menu = self.temp_menu_before_func
+				self.history.pop(-1)
 
 		self.print_current_menu()
 
 	def ask_user_input(self):
-		while(True):
-			#Make validations on user input
-			choice = input("> ")
-			if(self.verify_user_input(choice)):
-				self.history.append(choice)
-				self.select_correct_menu()
-			else:
-				print("Incorrect choice")
-				continue
+		try:
+			while(True):
+				#Make validations on user input
+				choice = input("> ")
+				if(self.verify_user_input(choice)):
+					self.history.append(choice)
+					self.select_correct_menu()
+				else:
+					print("Incorrect choice")
+					continue
+		except KeyboardInterrupt:
+			exit()
 
 
 	def verify_user_input(self, user_input):

@@ -77,7 +77,9 @@ class Connector:
         mail = input("mail ? \n")
         if(self.emailthruster is None):
             self.emailthruster = REP.Reputation(mail)
-        self.emailthruster.set_mail(mail)
+        else:
+            self.emailthruster.set_mail(mail)
+        print(self.emailthruster.mail)
         print("done")
 
     def setup_proxy_thrust(self):
@@ -99,6 +101,7 @@ class Connector:
         if (self.emailthruster is None):
             print("Veuillez renseigné un mail au préalable")
         else:
+            print(self.emailthruster.mail)
             self.emailthruster.run()
             print("done")
 
